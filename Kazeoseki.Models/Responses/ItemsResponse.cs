@@ -8,6 +8,6 @@ namespace KazeosekiApp.Models.Responses
 {
     public class ItemsResponse<T> : SuccessResponse
     {
-        public List<T> Item { get; set; }
+        public List<T> Items { get; set; }
     }
 }

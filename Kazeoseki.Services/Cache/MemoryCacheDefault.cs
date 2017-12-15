@@ -5,7 +5,7 @@ using System.Runtime.Caching;
 
 namespace Kazeoseki.Services
 {
-    public class MemoryCacheDefault : ICacheService
+    public class MemoryCacheDefault
     {
         private static readonly MemoryCache Cache = MemoryCache.Default;
 

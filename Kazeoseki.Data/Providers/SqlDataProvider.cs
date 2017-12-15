@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KazeosekiApp.Data
+namespace Kazeoseki.Data
 {
     public sealed class SqlDataProvider : Kazeoseki.Data.Providers.IDataProvider
     {

@@ -54,6 +54,8 @@
     <Compile Include="Interfaces\ICacheService.cs" />
     <Compile Include="Interfaces\ICryptographyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kazeoseki.Data\Kazeoseki.Data.csproj">

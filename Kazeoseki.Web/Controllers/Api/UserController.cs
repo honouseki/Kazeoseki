@@ -1,4 +1,5 @@
-﻿using Kazeoseki.Models.ViewModels;
+﻿using Kazeoseki.Models.Domain;
+using Kazeoseki.Models.ViewModels;
 using Kazeoseki.Services.Services;
 using KazeosekiApp.Models.Responses;
 using System;
@@ -29,5 +30,36 @@ namespace Kazeoseki.Web.Controllers.Api
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+        [Route("{username}"), HttpGet, AllowAnonymous]
+        public HttpResponseMessage SelectByUsername(string username)
+        {
+            try
+            {
+                ItemResponse<LoginUser> resp = new ItemResponse<LoginUser>();
+                resp.Item = userService.SelectByUsername(username);
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route, HttpPost, AllowAnonymous]
+        public HttpResponseMessage Insert(LoginUser model)
+        {
+            try
+            {
+                ItemResponse<int> resp = new ItemResponse<int>();
+                resp.Item = userService.Insert(model);
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
     }
 }

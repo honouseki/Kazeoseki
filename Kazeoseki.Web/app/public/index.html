@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="publicApp">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kazeoseki</title>
+
+    <!--Material-->
+    <link href="../../../Content/angular-material.min.css" rel="stylesheet" />
+    <!--Bootstrap-->
+    <link href="../../../Content/bootstrap.min.css" rel="stylesheet" />
+    <!--Toastr-->
+    <link href="../../../Content/toastr.min.css" rel="stylesheet" />
+    <!--Primary Stylesheet-->
+    <link href="../../../Content/publicApp.css" rel="stylesheet" />
+</head>
+<body>
+    <md-button>Click mee</md-button>
+    <div ui-view></div>
+    <a ui-sref="home">Home</a>
+    <a ui-sref="about">About</a>
+    <!--JavaScript Plugins-->
+    <script src="../../../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="../../../Scripts/angular.min.js"></script>
+    <script src="../../../Scripts/angular-ui-router.min.js"></script>
+    <script src="../../../Scripts/angular-route.min.js"></script>
+    <script src="/app/public/app.public.js"></script>
+    <script src="/app/public/app.routes.js"></script>
+    <!--Services-->
+    <script src="/app/public/modules/home/home.service.js"></script>
+    <!--Controllers-->
+    <script src="/app/public/modules/home/home.controller.js"></script>
+
+    <!--Angular Material-->
+    <script src="../../../Scripts/angular-cookies.min.js"></script>
+    <script src="../../../Scripts/toastr.min.js"></script>
+    <script src="../../../Scripts/angular-animate.min.js"></script>
+    <script src="../../../Scripts/angular-aria.min.js"></script>
+    <script src="../../../Scripts/angular-messages.min.js"></script>
+    <script src="../../../Scripts/angular-material.min.js"></script>
+    <script src="../../../Scripts/angular-sanitize.min.js"></script>
+
+    <!--Bootstrap/JQuery-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+    <script src="../../../Scripts/bootstrap.min.js"></script>
+    <script src="../../../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="../../../Scripts/jquery.validate.min.js"></script>
+
+</body>
+</html>

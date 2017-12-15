@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace Kazeoseki.Services
 {
-    public class Base64StringCryptographyService : ICryptographyService
+    public class Base64StringCryptographyService
     {
         public string GenerateRandomString(int length)
         {

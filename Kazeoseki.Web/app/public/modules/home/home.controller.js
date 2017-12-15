@@ -11,6 +11,8 @@
         vm.$onInit = _onInit;
         vm.homeService = HomeService;
 
+        vm.item = {};
+
         function _onInit() {
             console.log("On Home Controller");
             vm.homeService.getEchoTest("testString")

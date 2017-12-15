@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kazeoseki.Models
+namespace KazeosekiApp.Models.Responses
 {
-    public class Class1
+    public class ItemResponse<T> : SuccessResponse
     {
+        public T Item { get; set; }
     }
 }

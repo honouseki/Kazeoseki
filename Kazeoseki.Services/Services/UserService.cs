@@ -40,13 +40,44 @@ namespace Kazeoseki.Services.Services
                     model.CreatedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedBy = reader.GetSafeString(index++);
+                    model.LoginTypeId = reader.GetSafeInt32(index++);
                     result.Add(model);
                 }
             );
             return result;
         }
 
-        // Insert User
+        // Select By Username
+        public LoginUser SelectByUsername(string username)
+        {
+            LoginUser model = new LoginUser();
+            this.DataProvider.ExecuteCmd(
+                "Users_SelectByUsername",
+                inputParamMapper: delegate(SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Username", username);
+                },
+                singleRecordMapper: delegate(IDataReader reader, short set)
+                {
+                    int index = 0;
+                    model.UserId = reader.GetSafeInt32(index++);
+                    model.Username = reader.GetSafeString(index++);
+                    model.Email = reader.GetSafeString(index++);
+                    model.Salt = reader.GetSafeString(index++);
+                    model.HashPassword = reader.GetSafeString(index++);
+                    model.RoleId = reader.GetSafeInt32(index++);
+                    model.Confirmed = reader.GetSafeBool(index++);
+                    model.Suspended = reader.GetSafeBool(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+                    model.LoginTypeId = reader.GetSafeInt32(index++);
+                }
+            );
+            return model;
+        }
+
+        // Insert User; Register
         public int Insert(LoginUser model)
         {
             LoginUser loginModel = SelectByUsername(model.Username);
@@ -76,6 +107,7 @@ namespace Kazeoseki.Services.Services
                         paramCol.AddWithValue("@Email", model.Email);
                         paramCol.AddWithValue("@Salt", model.Salt);
                         paramCol.AddWithValue("@HashPassword", model.HashPassword);
+                        paramCol.AddWithValue("@LoginTypeId", model.LoginTypeId);
                     },
                     returnParameters: delegate(SqlParameterCollection paramCol)
                     {
@@ -91,37 +123,42 @@ namespace Kazeoseki.Services.Services
 
         }
 
-        // Call to retrieve specific user data
-        public LoginUser SelectByUsername(string username)
+        // Login
+        public bool Login(string username, string password, bool remember)
         {
-            LoginUser model = new LoginUser();
-            this.DataProvider.ExecuteCmd(
-                "Users_SelectByUsername",
-                inputParamMapper: delegate(SqlParameterCollection paramCol)
+            bool isSuccessful = false;
+            LoginUser loginModel = SelectByUsername(username.ToLower());
+            if (loginModel.UserId != 0 && !String.IsNullOrEmpty(loginModel.Salt))
+            {
+                int multOf4 = loginModel.Salt.Length % 4;
+                if (multOf4 > 0)
                 {
-                    paramCol.AddWithValue("@Username", username);
-                },
-                singleRecordMapper: delegate(IDataReader reader, short set)
-                {
-                    int index = 0;
-                    model.UserId = reader.GetSafeInt32(index++);
-                    model.Username = reader.GetSafeString(index++);
-                    model.Email = reader.GetSafeString(index++);
-                    model.Salt = reader.GetSafeString(index++);
-                    model.HashPassword = reader.GetSafeString(index++);
-                    model.RoleId = reader.GetSafeInt32(index++);
-                    model.Confirmed = reader.GetSafeBool(index++);
-                    model.Suspended = reader.GetSafeBool(index++);
-                    model.CreatedDate = reader.GetSafeDateTime(index++);
-                    model.ModifiedDate = reader.GetSafeDateTime(index++);
-                    model.ModifiedBy = reader.GetSafeString(index++);
+                    loginModel.Salt += new string('=', 4 - multOf4);
                 }
-            );
-            return model;
+
+                string hashPassword = _cryptographyService.Hash(password, loginModel.Salt, HASH_ITERATION_COUNT);
+
+                UserBase resp = new UserBase()
+                {
+                    UserId = loginModel.UserId,
+                    Roles = new[] { "User" },
+                    Username = loginModel.Username,
+                    Email = loginModel.Email,
+                    Remember = remember,
+                    RoleId = loginModel.RoleId
+                };
+
+                // To create the cookie? Will do later
+                //Claim emailClaim = new Claim(userData.Email.ToString(), "LPGallery");
+                //_authenticationService.LogIn(response, new Claim[] { emailClaim });
+
+                if (username == loginModel.Username && hashPassword == loginModel.HashPassword)
+                {
+                    isSuccessful = true;
+                }
+            }
+                return isSuccessful;
         }
-
-
-
 
 
 

@@ -127,7 +127,8 @@ namespace Kazeoseki.Services.Services
         public bool Login(string username, string password, bool remember)
         {
             bool isSuccessful = false;
-            LoginUser loginModel = SelectByUsername(username.ToLower());
+            username = username.ToLower();
+            LoginUser loginModel = SelectByUsername(username);
             if (loginModel.UserId != 0 && !String.IsNullOrEmpty(loginModel.Salt))
             {
                 int multOf4 = loginModel.Salt.Length % 4;

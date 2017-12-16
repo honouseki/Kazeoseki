@@ -19,5 +19,6 @@ namespace Kazeoseki.Models.ViewModels
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public int LoginTypeId { get; set; }
     }
 }

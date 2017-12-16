@@ -40,13 +40,44 @@ namespace Kazeoseki.Services.Services
                     model.CreatedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedBy = reader.GetSafeString(index++);
+                    model.LoginTypeId = reader.GetSafeInt32(index++);
                     result.Add(model);
                 }
             );
             return result;
         }
 
-        // Insert User
+        // Select By Username
+        public LoginUser SelectByUsername(string username)
+        {
+            LoginUser model = new LoginUser();
+            this.DataProvider.ExecuteCmd(
+                "Users_SelectByUsername",
+                inputParamMapper: delegate(SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Username", username);
+                },
+                singleRecordMapper: delegate(IDataReader reader, short set)
+                {
+                    int index = 0;
+                    model.UserId = reader.GetSafeInt32(index++);
+                    model.Username = reader.GetSafeString(index++);
+                    model.Email = reader.GetSafeString(index++);
+                    model.Salt = reader.GetSafeString(index++);
+                    model.HashPassword = reader.GetSafeString(index++);
+                    model.RoleId = reader.GetSafeInt32(index++);
+                    model.Confirmed = reader.GetSafeBool(index++);
+                    model.Suspended = reader.GetSafeBool(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+                    model.LoginTypeId = reader.GetSafeInt32(index++);
+                }
+            );
+            return model;
+        }
+
+        // Insert User; Register
         public int Insert(LoginUser model)
         {
             LoginUser loginModel = SelectByUsername(model.Username);
@@ -76,6 +107,7 @@ namespace Kazeoseki.Services.Services
                         paramCol.AddWithValue("@Email", model.Email);
                         paramCol.AddWithValue("@Salt", model.Salt);
                         paramCol.AddWithValue("@HashPassword", model.HashPassword);
+                        paramCol.AddWithValue("@LoginTypeId", model.LoginTypeId);
                     },
                     returnParameters: delegate(SqlParameterCollection paramCol)
                     {
@@ -91,37 +123,8 @@ namespace Kazeoseki.Services.Services
 
         }
 
-        // Call to retrieve specific user data
-        public LoginUser SelectByUsername(string username)
-        {
-            LoginUser model = new LoginUser();
-            this.DataProvider.ExecuteCmd(
-                "Users_SelectByUsername",
-                inputParamMapper: delegate(SqlParameterCollection paramCol)
-                {
-                    paramCol.AddWithValue("@Username", username);
-                },
-                singleRecordMapper: delegate(IDataReader reader, short set)
-                {
-                    int index = 0;
-                    model.UserId = reader.GetSafeInt32(index++);
-                    model.Username = reader.GetSafeString(index++);
-                    model.Email = reader.GetSafeString(index++);
-                    model.Salt = reader.GetSafeString(index++);
-                    model.HashPassword = reader.GetSafeString(index++);
-                    model.RoleId = reader.GetSafeInt32(index++);
-                    model.Confirmed = reader.GetSafeBool(index++);
-                    model.Suspended = reader.GetSafeBool(index++);
-                    model.CreatedDate = reader.GetSafeDateTime(index++);
-                    model.ModifiedDate = reader.GetSafeDateTime(index++);
-                    model.ModifiedBy = reader.GetSafeString(index++);
-                }
-            );
-            return model;
-        }
-
-
-
+        // Login
+        //public bool Login(string username, string password, bool remember, string userType)
 
 
 

@@ -20,5 +20,6 @@ namespace Kazeoseki.Models.Domain
         public DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public string Password { get; set; }
+        public int LoginTypeId { get; set; }
     }
 }

@@ -124,7 +124,41 @@ namespace Kazeoseki.Services.Services
         }
 
         // Login
-        //public bool Login(string username, string password, bool remember, string userType)
+        public bool Login(string username, string password, bool remember)
+        {
+            bool isSuccessful = false;
+            LoginUser loginModel = SelectByUsername(username.ToLower());
+            if (loginModel.UserId != 0 && !String.IsNullOrEmpty(loginModel.Salt))
+            {
+                int multOf4 = loginModel.Salt.Length % 4;
+                if (multOf4 > 0)
+                {
+                    loginModel.Salt += new string('=', 4 - multOf4);
+                }
+
+                string hashPassword = _cryptographyService.Hash(password, loginModel.Salt, HASH_ITERATION_COUNT);
+
+                UserBase resp = new UserBase()
+                {
+                    UserId = loginModel.UserId,
+                    Roles = new[] { "User" },
+                    Username = loginModel.Username,
+                    Email = loginModel.Email,
+                    Remember = remember,
+                    RoleId = loginModel.RoleId
+                };
+
+                // To create the cookie? Will do later
+                //Claim emailClaim = new Claim(userData.Email.ToString(), "LPGallery");
+                //_authenticationService.LogIn(response, new Claim[] { emailClaim });
+
+                if (username == loginModel.Username && hashPassword == loginModel.HashPassword)
+                {
+                    isSuccessful = true;
+                }
+            }
+                return isSuccessful;
+        }
 
 
 

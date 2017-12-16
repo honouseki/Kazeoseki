@@ -61,5 +61,20 @@ namespace Kazeoseki.Web.Controllers.Api
             }
         }
 
+        [Route("{username}/{password}/{remember}"), HttpGet, AllowAnonymous]
+        public HttpResponseMessage Login(string username, string password, bool remember)
+        {
+            try
+            {
+                ItemResponse<bool> resp = new ItemResponse<bool>();
+                resp.Item = userService.Login(username, password, remember);
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
     }
 }

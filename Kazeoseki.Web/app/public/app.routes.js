@@ -21,6 +21,13 @@
                 controller: 'homeController as homeCtrl'
             })
             .state({
+                name: 'regLogin',
+                url: '/register_login',
+                templateUrl: '/app/public/modules/regLogin/regLogin.html',
+                title: 'Register/Login'
+                //controller: 'homeController as homeCtrl'
+            })
+            .state({
                 name: 'about',
                 url: '/about',
                 templateUrl: '/app/public/modules/about/about.html',

@@ -1,4 +1,42 @@
-﻿body {
+﻿html, body {
     background: linear-gradient(black, #3D3359);
+    color: white;
+    background-attachment: fixed;
+}
+
+.titanCustomGradient {
+    background: linear-gradient(black, #3D3359);
+}
+.titanCustomGradient2 {
+    background: linear-gradient(#3D3359, black);
+}
+.titanCustomFooterInfo {
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 40px;
+    position: static;
+}
+.titanCustomModule {
+    position: relative;
+    padding: 100px 0;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    width: 100%;
+    min-height: 800px;
+}
+
+.regLoginList {
+    list-style: none;
+}
+.regLoginList li {
+    display: inline;
+    font-size: 10px;
+    padding-right: 10px;
+}
+a {
+    color: #9EAAAA;
+}
+a:hover {
     color: white;
 }

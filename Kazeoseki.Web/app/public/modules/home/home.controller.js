@@ -4,10 +4,11 @@
         .module("publicApp")
         .controller("homeController", HomeController);
 
-    HomeController.$inject = ["homeService"];
+    HomeController.$inject = ["$scope", "homeService"];
 
-    function HomeController(HomeService) {
+    function HomeController($scope, HomeService) {
         var vm = this;
+        vm.$scope = $scope;
         vm.$onInit = _onInit;
         vm.homeService = HomeService;
 

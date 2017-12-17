@@ -239,6 +239,9 @@
     <Content Include="app\public\modules\home\home.controller.js" />
     <Content Include="app\public\modules\home\home.html" />
     <Content Include="app\public\modules\home\home.service.js" />
+    <Content Include="app\public\modules\regLogin\regLogin.component.js" />
+    <Content Include="app\public\modules\regLogin\regLogin.html" />
+    <Content Include="app\public\modules\regLogin\regLoginDetails.html" />
     <Content Include="Content\angular-material.css" />
     <Content Include="Content\angular-material.layout-attributes.css" />
     <Content Include="Content\angular-material.layout-attributes.min.css" />
@@ -1133,6 +1136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Titan-master\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

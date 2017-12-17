@@ -5,6 +5,7 @@ html {
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: scrollbar;
+  height: 100%;
 }
 
 body {
@@ -1239,7 +1240,7 @@ General Styles - Owlcarousel
 	Navbar
 --------------------------------------------------------------*/
 .navbar-custom {
-  background-color: rgba(10, 10, 10, 0.9);
+  background-color: #000;
   border: 0;
   border-radius: 0;
   z-index: 1000;
@@ -1508,9 +1509,8 @@ General Styles - Owlcarousel
 .footer {
   padding: 10px 0;
   bottom: 0;
-  position: absolute;
   width: 100%;
-  background: linear-gradient(#3D3359, black);
+  position: fixed;
 }
 
 .footer .copyright {

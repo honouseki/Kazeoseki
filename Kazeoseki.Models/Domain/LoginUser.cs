@@ -10,9 +10,9 @@ namespace Kazeoseki.Models.Domain
     public class LoginUser
     {
         public int UserId { get; set; }
-        [Required, MaxLength(50)]
+        [Required, MaxLength(50, ErrorMessage = "Username is too fucking long")]
         public string Username { get; set; }
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email address is invalid")]
         public string Email { get; set; }
         public string Salt { get; set; }
         public string HashPassword { get; set; }
@@ -22,7 +22,8 @@ namespace Kazeoseki.Models.Domain
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
-        [Required]
+        [Required, MinLength(6, ErrorMessage = "Password requires minimum of 6 characters")]
+        //[RegularExpression(@"^[a-zA-Z][0-9]$", ErrorMessage = "Does not contain a letter AND a number")]
         public string Password { get; set; }
         public int LoginTypeId { get; set; }
     }

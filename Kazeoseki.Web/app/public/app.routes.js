@@ -24,8 +24,8 @@
                 name: 'regLogin',
                 url: '/register_login',
                 templateUrl: '/app/public/modules/regLogin/regLogin.html',
-                title: 'Register/Login'
-                //controller: 'homeController as homeCtrl'
+                title: 'Register/Login',
+                controller: 'regLoginController as regLogCtrl'
             })
             .state({
                 name: 'about',

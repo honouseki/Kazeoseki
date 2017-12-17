@@ -124,11 +124,11 @@ namespace Kazeoseki.Services.Services
         }
 
         // Login
-        public bool Login(string username, string password, bool remember)
+        public bool Login(LoginUser model, bool remember)
         {
             bool isSuccessful = false;
-            username = username.ToLower();
-            LoginUser loginModel = SelectByUsername(username);
+            model.Username = model.Username.ToLower();
+            LoginUser loginModel = SelectByUsername(model.Username);
             if (loginModel.UserId != 0 && !String.IsNullOrEmpty(loginModel.Salt))
             {
                 int multOf4 = loginModel.Salt.Length % 4;
@@ -137,7 +137,7 @@ namespace Kazeoseki.Services.Services
                     loginModel.Salt += new string('=', 4 - multOf4);
                 }
 
-                string hashPassword = _cryptographyService.Hash(password, loginModel.Salt, HASH_ITERATION_COUNT);
+                string hashPassword = _cryptographyService.Hash(model.Password, loginModel.Salt, HASH_ITERATION_COUNT);
 
                 UserBase resp = new UserBase()
                 {
@@ -152,8 +152,9 @@ namespace Kazeoseki.Services.Services
                 // To create the cookie? Will do later
                 //Claim emailClaim = new Claim(userData.Email.ToString(), "LPGallery");
                 //_authenticationService.LogIn(response, new Claim[] { emailClaim });
+                // This is where we use remember to store in the cookie^
 
-                if (username == loginModel.Username && hashPassword == loginModel.HashPassword)
+                if (model.Username == loginModel.Username && hashPassword == loginModel.HashPassword)
                 {
                     isSuccessful = true;
                 }

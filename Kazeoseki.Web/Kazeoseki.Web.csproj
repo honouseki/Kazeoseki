@@ -240,7 +240,9 @@
     <Content Include="app\public\modules\home\home.html" />
     <Content Include="app\public\modules\home\home.service.js" />
     <Content Include="app\public\modules\regLogin\regLogin.component.js" />
+    <Content Include="app\public\modules\regLogin\regLogin.controller.js" />
     <Content Include="app\public\modules\regLogin\regLogin.html" />
+    <Content Include="app\public\modules\regLogin\regLogin.service.js" />
     <Content Include="app\public\modules\regLogin\regLoginDetails.html" />
     <Content Include="Content\angular-material.css" />
     <Content Include="Content\angular-material.layout-attributes.css" />

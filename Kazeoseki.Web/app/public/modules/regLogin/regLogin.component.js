@@ -4,7 +4,7 @@
         .module("publicApp")
         .component("regLoginDetails", {
             templateUrl: "/app/public/modules/reglogin/regLoginDetails.html",
-            controller: "regLoginController"
+            controller: "regLoginCompController"
         });
 })();
 
@@ -12,17 +12,17 @@
     "use strict";
     angular
         .module("publicApp")
-        .controller("regLoginController", RegLoginController);
+        .controller("regLoginCompController", RegLoginCompController);
 
-    RegLoginController.$inject = ["$scope"];
+    RegLoginCompController.$inject = ["$scope"];
 
-    function RegLoginController($scope) {
+    function RegLoginCompController($scope) {
         var vm = this;
         vm.$scope = $scope;
         vm.$onInit = _onInit;
 
         function _onInit() {
-            console.log("RegLoginController");
+            console.log("RegLoginCompController");
         }
     }
 })();

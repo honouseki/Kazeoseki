@@ -27,8 +27,6 @@
                     <div class="form-group">
                         <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/">
                         <p class="help-block" ng-show="loginForm.password.$error.required && loginForm.password.$dirty">Gimme your password--I mean, well..I don't store it but..Er</p>
-                        <p class="help-block" ng-show="loginForm.password.$error.minlength && loginForm.password.$dirty">Your password is too short. At least 6 characters please</p>
-                        <p class="help-block" ng-show="loginForm.password.$error.pattern && loginForm.password.$dirty">Needs at least a letter AND a number! You disappoint me</p>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-round btn-b" ng-click="regLogCtrl.login(); loginForm.$setPristine()" ng-disabled="loginForm.$invalid">Login</button>
@@ -53,7 +51,7 @@
                         <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/" />
                         <p class="help-block" ng-show="regForm.password.$error.required && regForm.password.$dirty">Do you not want a password for your account? TOO BAD. You need one</p>
                         <p class="help-block" ng-show="regForm.password.$error.minlength && regForm.password.$dirty">Your password is too short. At least 6 characters please</p>
-                        <p class="help-block" ng-show="regForm.password.$error.pattern && regForm.password.$dirty">Please have your password a number and a letter because standards dictate it to be so</p>
+                        <p class="help-block" ng-show="regForm.password.$error.pattern && regForm.password.$dirty">Please have your password a number and a letter because standards dictate it to be so. P.S. You disappoint me</p>
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" ng-model="regLogCtrl.item.confirmPass" name="confirmPass" placeholder="Confirm Password" required ng-minlength="6" pattern="regLogCtrl.item.password" />

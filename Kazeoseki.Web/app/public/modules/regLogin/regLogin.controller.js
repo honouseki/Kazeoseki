@@ -52,6 +52,7 @@
             }
             function error(err) {
                 console.log(err);
+                alert("Failed to register");
             }
         }
     }

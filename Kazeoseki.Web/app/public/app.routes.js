@@ -11,7 +11,7 @@
             enabled: true,
             requireBase: false
         });
-        //$urlRouterProvider.otherwise('/home').;
+        $urlRouterProvider.otherwise('/home');
         $stateProvider
             .state({
                 name: 'home',

@@ -1,4 +1,10 @@
-﻿<section class="bg-dark-30" data-background="assets/images/section-4.jpg">
+﻿<style>
+    button:hover {
+        background-color: #28223B !important;
+    } 
+</style>
+
+<section class="bg-dark-30" data-background="assets/images/section-4.jpg">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -15,13 +21,17 @@
                 <hr class="divider-w mb-10">
                 <form class="form" name="loginForm" novalidate>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="username" placeholder="Username" />
+                        <input class="form-control" type="text" ng-model="regLogCtrl.item.username" name="username" placeholder="Username" required ng-maxlength="50" />
+                        <p class="help-block" ng-show="loginForm.username.$error.required && loginForm.username.$dirty">Gimme your username</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="Password" />
+                        <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/">
+                        <p class="help-block" ng-show="loginForm.password.$error.required && loginForm.password.$dirty">Gimme your password--I mean, well..I don't store it but..Er</p>
+                        <p class="help-block" ng-show="loginForm.password.$error.minlength && loginForm.password.$dirty">Your password is too short. At least 6 characters please</p>
+                        <p class="help-block" ng-show="loginForm.password.$error.pattern && loginForm.password.$dirty">Needs at least a letter AND a number! You disappoint me</p>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-round btn-b">Login</button>
+                        <button type="submit" class="btn btn-round btn-b" ng-click="regLogCtrl.login(); loginForm.$setPristine()" ng-disabled="loginForm.$invalid">Login</button>
                     </div>
                     <div class="form-group"><a href="">Forgot Password?</a></div>
                 </form>

@@ -16,6 +16,7 @@
         vm.login = _login;
 
         vm.item = {};
+        vm.remember = false;
 
         function _onInit() {
             console.log("regLoginController");
@@ -36,8 +37,8 @@
 
         function _login() {
             console.log(vm.item);
-            //vm.regLoginService.login(vm.item)
-            //    .then(success).catch(error);
+            vm.regLoginService.login(vm.item, vm.remember)
+                .then(success).catch(error);
             function success(res) {
                 console.log(res);
                 vm.item = {};

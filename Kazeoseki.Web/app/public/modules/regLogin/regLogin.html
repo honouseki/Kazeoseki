@@ -39,21 +39,29 @@
             <div class="col-sm-5">
                 <h4 class="font-alt">Register</h4>
                 <hr class="divider-w mb-10">
-                <form class="form">
+                <form class="form" name="regForm" novalidate>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="email" placeholder="Email" />
+                        <input class="form-control" type="text" ng-model="regLogCtrl.item.username" name="username" placeholder="Username" required ng-maxlength="50" />
+                        <p class="help-block" ng-show="regForm.username.$error.required && regForm.username.$dirty">Please enter a username</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="username" placeholder="Username" />
+                        <input class="form-control" type="email" ng-model="regLogCtrl.item.email" name="email" placeholder="Email" required />
+                        <p class="help-block" ng-show="regForm.email.$error.required && regForm.email.$dirty">Please enter an email</p>
+                        <p class="help-block" ng-show="regForm.email.$error.email && regForm.email.$dirty">Your email sucks--er, is invalid</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="Password" />
+                        <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/" />
+                        <p class="help-block" ng-show="regForm.password.$error.required && regForm.password.$dirty">Do you not want a password for your account? TOO BAD. You need one</p>
+                        <p class="help-block" ng-show="regForm.password.$error.minlength && regForm.password.$dirty">Your password is too short. At least 6 characters please</p>
+                        <p class="help-block" ng-show="regForm.password.$error.pattern && regForm.password.$dirty">Please have your password a number and a letter because standards dictate it to be so</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="re-password" placeholder="Re-enter Password" />
+                        <input class="form-control" type="password" ng-model="regLogCtrl.item.confirmPass" name="confirmPass" placeholder="Confirm Password" required ng-minlength="6" pattern="regLogCtrl.item.password" />
+                        <p class="help-block" ng-show="regForm.confirmPass.$error.required && regForm.confirmPass.$dirty">Please confirm your password</p>
+                        <p class="help-block" ng-show="regForm.confirmPass.$error.pattern && regForm.confirmPass.$dirty">Passwords don't match, my friend</p>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-block btn-round btn-b">Register</button>
+                        <button class="btn btn-block btn-round btn-b" ng-click="regLogCtrl.register(); regForm.$setPristine()" ng-disabled="regForm.$invalid">Register</button>
                     </div>
                 </form>
             </div>

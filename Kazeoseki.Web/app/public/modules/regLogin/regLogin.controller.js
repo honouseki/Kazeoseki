@@ -4,11 +4,12 @@
         .module("publicApp")
         .controller("regLoginController", RegLoginController);
 
-    RegLoginController.$inject = ["$scope", "regLoginService"];
+    RegLoginController.$inject = ["$scope", "$location", "$rootScope", "$cookies", "regLoginService"];
 
-    function RegLoginController($scope, RegLoginService) {
+    function RegLoginController($scope, $location, $rootScope, $cookies, RegLoginService) {
         var vm = this;
         vm.$scope = $scope;
+        vm.$rootScope = $rootScope;
         vm.$onInit = _onInit;
         vm.regLoginService = RegLoginService;
 
@@ -24,11 +25,11 @@
 
         function _register() {
             console.log(vm.item);
-            //vm.regLoginService.register(vm.item)
-            //    .then(success).catch(error);
+            vm.regLoginService.register(vm.item)
+                .then(success).catch(error);
             function success(res) {
                 console.log(res);
-                vm.item = {};
+                vm.login();
             }
             function error(err) {
                 console.log(err);
@@ -41,7 +42,13 @@
                 .then(success).catch(error);
             function success(res) {
                 console.log(res);
-                vm.item = {};
+                if (res.data.item == true) {
+                    vm.item = {};
+                    vm.$rootScope.$broadcast("loginSuccess");
+                    $location.path("/home");
+                } else {
+                    alert("Failed to login");
+                };
             }
             function error(err) {
                 console.log(err);

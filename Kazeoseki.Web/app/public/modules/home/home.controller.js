@@ -16,7 +16,7 @@
 
         function _onInit() {
             console.log("On Home Controller");
-            $location.hash("topOfPage");
+            //$location.hash("topOfPage");
             vm.homeService.getEchoTest("On the Home Controller through API")
                 .then(success).catch(error);
             function success(res) {

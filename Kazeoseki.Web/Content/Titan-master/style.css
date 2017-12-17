@@ -675,24 +675,24 @@ a,
 
 .btn.btn-w {
   background: rgba(255, 255, 255, 0.8);
-  color: #111;
+  color: white;
 }
 
 .btn.btn-w:hover,
 .btn.btn-w:focus {
   background: white;
-  color: #111;
+  color: white;
 }
 
 .btn.btn-g {
   background: #e5e5e5;
-  color: #111;
+  color: white;
 }
 
 .btn.btn-g:hover,
 .btn.btn-g:focus {
   background: #d8d8d8;
-  color: #111;
+  color: white;
 }
 
 .btn.btn-border-w {
@@ -705,7 +705,7 @@ a,
 .btn.btn-border-w:focus {
   background: #fff;
   border-color: transparent;
-  color: #111;
+  color: white;
 }
 
 .btn.btn-d {
@@ -731,7 +731,7 @@ a,
 .btn-border-d {
   background: transparent;
   border: 1px solid #111111;
-  color: #111;
+  color: white;
 }
 
 .btn.btn-border-d:hover,
@@ -747,7 +747,7 @@ a,
 
 .btn.btn-font-w:hover {
   background: #fff;
-  color: #111;
+  color: white;
 }
 
 /* Buttons size */
@@ -855,7 +855,7 @@ a,
 	Typography
 --------------------------------------------------------------*/
 a {
-  color: #111;
+  color: white;
 }
 
 a:hover, a:focus {
@@ -913,14 +913,14 @@ blockquote {
   text-align: center;
   font-weight: 400;
   font-size: 30px;
-  color: #111;
+  color: white;
   margin: 0 0 70px;
 }
 
 .module-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #111;
+  color: white;
   margin-bottom: 70px;
 }
 
@@ -943,7 +943,7 @@ blockquote {
   display: table-cell;
   white-space: pre;
   padding: 0 8px;
-  color: #111;
+  color: white;
 }
 
 /* Finance case study header */
@@ -1170,7 +1170,7 @@ General Styles - Owlcarousel
   display: inline-block;
   margin: 5px;
   font-size: 14px;
-  color: #111;
+  color: white;
 }
 
 /*--------------------------------------------------------------
@@ -1556,7 +1556,7 @@ Google map
 .alt-features-icon {
   line-height: 1.2;
   font-size: 42px;
-  color: #111;
+  color: white;
 }
 
 .features-title,
@@ -1565,7 +1565,7 @@ Google map
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 14px;
-  color: #111;
+  color: white;
   margin: 16px 0 15px;
 }
 
@@ -1600,7 +1600,7 @@ Google map
 .content-box-title {
   font-weight: 400;
   font-size: 18px;
-  color: #111;
+  color: white;
   margin: 16px 0 15px;
 }
 
@@ -1670,7 +1670,7 @@ Google map
 
 .team-name {
   font-size: 14px;
-  color: #111;
+  color: white;
 }
 
 .team-role {
@@ -1703,7 +1703,7 @@ Google map
 .menu-price {
   margin: 0 0 10px;
   font-size: 14px;
-  color: #111;
+  color: white;
 }
 
 .menu-price-detail {
@@ -1775,13 +1775,13 @@ Google map
 }
 
 .price-table h4 {
-  color: #111;
+  color: white;
   margin: 0;
 }
 
 .price-table p.price {
   font-size: 60px;
-  color: #111;
+  color: white;
   padding: 0;
   margin: 0 0 0 -10px;
 }
@@ -1968,7 +1968,7 @@ Google map
 
 /* Work item white background*/
 .works-grid.works-hover-w .work-title {
-  color: #111;
+  color: white;
 }
 
 .works-grid.works-hover-w .work-item:hover .work-image:after {
@@ -2003,7 +2003,7 @@ Google map
 }
 
 .work-details-title {
-  color: #111;
+  color: white;
   margin: 0 0 20px;
 }
 
@@ -2160,7 +2160,7 @@ Google map
 .post-title {
   line-height: 1.4;
   font-size: 22px;
-  color: #111;
+  color: white;
   margin: 0;
 }
 
@@ -2271,7 +2271,7 @@ Google map
   opacity: 0;
   line-height: 12px;
   font-size: 12px;
-  color: #111;
+  color: white;
   padding: 4px 0px;
 }
 
@@ -2361,7 +2361,7 @@ Google map
 }
 
 .sidebar .widget-title {
-  color: #111;
+  color: white;
 }
 
 .widget .widget-title {
@@ -2438,7 +2438,7 @@ Google map
 .comment-form .comment-form-title {
   border-bottom: 1px dotted #c2c2c2;
   font-size: 16px;
-  color: #111;
+  color: white;
   padding-bottom: 15px;
   margin: 0 0 20px;
 }
@@ -2529,7 +2529,7 @@ Google map
 .shop-item-title {
   font-weight: 400;
   font-size: 14px;
-  color: #111;
+  color: white;
   margin: 15px 0 5px;
 }
 
@@ -2580,7 +2580,7 @@ Google map
 
 .product-title {
   margin: 0 0 20px;
-  color: #111;
+  color: white;
 }
 
 .star,
@@ -2595,7 +2595,7 @@ Google map
 
 .amount {
   font-size: 32px;
-  color: #111;
+  color: white;
 }
 
 .reviews {

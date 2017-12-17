@@ -4,10 +4,11 @@
         .module("publicApp")
         .controller("homeController", HomeController);
 
-    HomeController.$inject = ["homeService"];
+    HomeController.$inject = ["$scope", "$location", "homeService"];
 
-    function HomeController(HomeService) {
+    function HomeController($scope, $location, HomeService) {
         var vm = this;
+        vm.$scope = $scope;
         vm.$onInit = _onInit;
         vm.homeService = HomeService;
 
@@ -15,7 +16,8 @@
 
         function _onInit() {
             console.log("On Home Controller");
-            vm.homeService.getEchoTest("testString")
+            $location.hash("topOfPage");
+            vm.homeService.getEchoTest("On the Home Controller through API")
                 .then(success).catch(error);
             function success(res) {
                 console.log(res);

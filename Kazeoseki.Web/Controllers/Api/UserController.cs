@@ -49,6 +49,10 @@ namespace Kazeoseki.Web.Controllers.Api
         [Route, HttpPost, AllowAnonymous]
         public HttpResponseMessage Insert(LoginUser model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
             try
             {
                 ItemResponse<int> resp = new ItemResponse<int>();
@@ -61,13 +65,17 @@ namespace Kazeoseki.Web.Controllers.Api
             }
         }
 
-        [Route("{username}/{password}/{remember}"), HttpGet, AllowAnonymous]
-        public HttpResponseMessage Login(string username, string password, bool remember)
+        [Route("login/{remember}"), HttpPost, AllowAnonymous]
+        public HttpResponseMessage Login(LoginUser model, bool remember)
         {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
             try
             {
                 ItemResponse<bool> resp = new ItemResponse<bool>();
-                resp.Item = userService.Login(username, password, remember);
+                resp.Item = userService.Login(model, remember);
                 return Request.CreateResponse(HttpStatusCode.OK, resp);
             }
             catch (Exception ex)

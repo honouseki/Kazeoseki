@@ -73,11 +73,11 @@ namespace Kazeoseki.Services.Services
             return id;
         }
 
-        //public void DeleteAmazonFile ; reference FileUploadService.cs from LPGallery
+        //public void DeleteAmazonFile ; reference FileUploadService.cs from LPGallery (separate to two functions)
 
         private void SaveToAmazon(string systemFileName, byte[] bytes)
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2))
+            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USWest1))
             {
                 var request = new PutObjectRequest
                 {

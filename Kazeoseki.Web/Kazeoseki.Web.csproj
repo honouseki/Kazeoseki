@@ -237,6 +237,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\admin\modules\gallery\galleryAdmin.controller.js" />
+    <Content Include="app\admin\modules\gallery\galleryAdmin.html" />
+    <Content Include="app\admin\modules\gallery\galleryAdmin.service.js" />
     <Content Include="app\public\app.public.js" />
     <Content Include="app\public\app.routes.js" />
     <Content Include="app\public\common-services\imagefile.service.js" />
@@ -269,6 +272,8 @@
     <Content Include="Content\Titan-master\et-line-font.css" />
     <Content Include="Content\Titan-master\flexslider.css" />
     <Content Include="Content\Titan-master\font-awesome.min.css" />
+    <Content Include="Content\Titan-master\fonts\et-line.svg" />
+    <Content Include="Content\Titan-master\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Titan-master\magnific-popup.css" />
     <Content Include="Content\Titan-master\owl.carousel.min.css" />
     <Content Include="Content\Titan-master\owl.theme.default.min.css" />
@@ -339,6 +344,14 @@
     <Content Include="Content\toastr.less" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
+    <Content Include="Content\Titan-master\fonts\et-line.eot" />
+    <Content Include="Content\Titan-master\fonts\et-line.ttf" />
+    <Content Include="Content\Titan-master\fonts\et-line.woff" />
+    <Content Include="Content\Titan-master\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Titan-master\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Titan-master\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Titan-master\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Titan-master\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1146,9 +1159,7 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\admin\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Titan-master\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

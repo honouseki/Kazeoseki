@@ -41,6 +41,16 @@
                 templateUrl: '/app/public/modules/gallery/gallery.html',
                 title: 'Gallery',
                 controller: 'galleryController as galleryCtrl'
+            })
+
+
+            // Admin tab routes
+            .state({
+                name: 'galleryAdmin',
+                url: '/galleryAdmin',
+                templateUrl: '/app/admin/modules/gallery/galleryAdmin.html',
+                title: 'Gallery Management',
+                controller: 'galleryAdminController as aGalleryCtrl'
             });
     }
 })();

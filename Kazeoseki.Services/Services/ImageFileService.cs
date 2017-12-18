@@ -1,8 +1,10 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
+using Kazeoseki.Data;
 using Kazeoseki.Models.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -71,6 +73,35 @@ namespace Kazeoseki.Services.Services
                     }
             );
             return id;
+        }
+
+        public List<ImageFile> SelectByImageType(int typeId)
+        {
+            List<ImageFile> result = new List<ImageFile>();
+            this.DataProvider.ExecuteCmd(
+                "ImageFiles_SelectByImageType",
+                inputParamMapper: delegate(SqlParameterCollection paramCol) 
+                {
+                    paramCol.AddWithValue("@ImageFileType", typeId);
+                },
+                singleRecordMapper: delegate(IDataReader reader, short set)
+                {
+                    ImageFile model = new ImageFile();
+                    int index = 0;
+
+                    model.FileId = reader.GetSafeInt32(index++);
+                    model.ImageFileName = reader.GetSafeString(index++);
+                    model.SystemFileName = reader.GetSafeString(index++);
+                    model.ImageFileType = reader.GetSafeInt32(index++);
+                    model.Location = reader.GetSafeString(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+
+                    result.Add(model);
+                }
+            );
+            return result;
         }
 
         //public void DeleteAmazonFile ; reference FileUploadService.cs from LPGallery (separate to two functions)

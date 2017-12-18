@@ -1,6 +1,8 @@
-﻿using Kazeoseki.Models.Domain;
+﻿using Kazeoseki.Data;
+using Kazeoseki.Models.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -35,6 +37,43 @@ namespace Kazeoseki.Services.Services
                 }
             );
             return id;
+        }
+
+        public List<GalleryImage> SelectAll()
+        {
+            List<GalleryImage> result = new List<GalleryImage>();
+            this.DataProvider.ExecuteCmd(
+                "GalleryImages_SelectAll",
+                inputParamMapper: null,
+                singleRecordMapper: delegate(IDataReader reader, short set)
+                {
+                    GalleryImage model = new GalleryImage();
+                    int index = 0;
+
+                    model.Id = reader.GetSafeInt32(index++);
+                    model.ImageTitle = reader.GetSafeString(index++);
+                    model.Description = reader.GetSafeString(index++);
+                    model.FileId = reader.GetSafeInt32(index++);
+                    model.CategoryId = reader.GetSafeInt32(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+
+                    result.Add(model);
+                }
+            );
+            return result;
+        }
+
+        public void Delete(int id)
+        {
+            this.DataProvider.ExecuteNonQuery(
+                "GalleryImages_Delete",
+                inputParamMapper: delegate(SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Id", id);
+                }
+            );
         }
     }
 }

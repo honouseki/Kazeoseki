@@ -32,9 +32,6 @@ namespace Kazeoseki.Web.Controllers.Api
                 model.ModifiedBy = "1";
                 model.Extension = encodedImage.FileExtension;
 
-                // Here, if following links example...set gallery upload here
-                // Pref - separation
-
                 ItemResponse<int> resp = new ItemResponse<int>();
                 resp.Item = imageFileService.Insert(model);
 
@@ -68,7 +65,36 @@ namespace Kazeoseki.Web.Controllers.Api
             }
         }
 
+        [Route, HttpGet, AllowAnonymous]
+        public HttpResponseMessage SelectAll()
+        {
+            try
+            {
+                ItemsResponse<GalleryImage> resp = new ItemsResponse<GalleryImage>();
+                resp.Items = galleryImageService.SelectAll();
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
 
+            }
+        }
+
+        [Route("{id:int}"), HttpDelete, AllowAnonymous]
+        public HttpResponseMessage Delete(int id)
+        {
+            try
+            {
+                galleryImageService.Delete(id);
+                SuccessResponse resp = new SuccessResponse();
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
 
     }
 }

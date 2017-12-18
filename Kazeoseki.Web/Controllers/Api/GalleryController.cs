@@ -81,6 +81,26 @@ namespace Kazeoseki.Web.Controllers.Api
             }
         }
 
+        [Route("{id:int}"), HttpPut, AllowAnonymous]
+        public HttpResponseMessage Update(int id, GalleryImage model)
+        {
+            model.Id = id;
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            try
+            {
+                galleryImageService.Update(model);
+                SuccessResponse resp = new SuccessResponse();
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [Route("{id:int}"), HttpDelete, AllowAnonymous]
         public HttpResponseMessage Delete(int id)
         {

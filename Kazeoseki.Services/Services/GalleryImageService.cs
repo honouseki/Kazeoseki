@@ -65,6 +65,22 @@ namespace Kazeoseki.Services.Services
             return result;
         }
 
+        public void Update(GalleryImage model)
+        {
+            this.DataProvider.ExecuteNonQuery(
+                "GalleryImages_Update",
+                inputParamMapper: delegate(SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Id", model.Id);
+                    paramCol.AddWithValue("@ImageTitle", model.ImageTitle);
+                    paramCol.AddWithValue("@Description", model.Description);
+                    paramCol.AddWithValue("@FileId", model.FileId);
+                    paramCol.AddWithValue("@CategoryId", model.CategoryId);
+                    paramCol.AddWithValue("@ModifiedBy", model.ModifiedBy);
+                }
+            );
+        }
+
         public void Delete(int id)
         {
             this.DataProvider.ExecuteNonQuery(

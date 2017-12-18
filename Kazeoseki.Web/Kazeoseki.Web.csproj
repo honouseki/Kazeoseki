@@ -239,8 +239,12 @@
   <ItemGroup>
     <Content Include="app\public\app.public.js" />
     <Content Include="app\public\app.routes.js" />
+    <Content Include="app\public\common-services\imagefile.service.js" />
     <Content Include="app\public\index.html" />
     <Content Include="app\public\modules\about\about.html" />
+    <Content Include="app\public\modules\gallery\gallery.controller.js" />
+    <Content Include="app\public\modules\gallery\gallery.html" />
+    <Content Include="app\public\modules\gallery\gallery.service.js" />
     <Content Include="app\public\modules\home\home.controller.js" />
     <Content Include="app\public\modules\home\home.html" />
     <Content Include="app\public\modules\home\home.service.js" />

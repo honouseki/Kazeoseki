@@ -33,6 +33,14 @@
                 templateUrl: '/app/public/modules/about/about.html',
                 title: 'About Me'
                 //,controller: 'homeController as homeCtrl'
+            })
+            .state({
+                name: 'gallery',
+                //url: '/gallery/{category}/{subcategory}'
+                url: '/gallery',
+                templateUrl: '/app/public/modules/gallery/gallery.html',
+                title: 'Gallery',
+                controller: 'galleryController as galleryCtrl'
             });
     }
 })();

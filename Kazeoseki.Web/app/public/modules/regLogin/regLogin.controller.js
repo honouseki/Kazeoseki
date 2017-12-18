@@ -16,7 +16,8 @@
         vm.register = _register;
         vm.login = _login;
 
-        vm.item = {};
+        vm.regItem = {};
+        vm.logItem = {};
         vm.remember = false;
 
         function _onInit() {
@@ -24,11 +25,12 @@
         }
 
         function _register() {
-            console.log(vm.item);
-            vm.regLoginService.register(vm.item)
+            console.log(vm.regItem);
+            vm.regLoginService.register(vm.regItem)
                 .then(success).catch(error);
             function success(res) {
                 console.log(res);
+                vm.logItem = vm.regItem;
                 vm.login();
             }
             function error(err) {
@@ -37,13 +39,12 @@
         }
 
         function _login() {
-            console.log(vm.item);
-            vm.regLoginService.login(vm.item, vm.remember)
+            console.log(vm.logItem);
+            vm.regLoginService.login(vm.logItem, vm.remember)
                 .then(success).catch(error);
             function success(res) {
                 console.log(res);
                 if (res.data.item == true) {
-                    vm.item = {};
                     vm.$rootScope.$broadcast("loginSuccess");
                     $location.path("/home");
                 } else {
@@ -52,6 +53,7 @@
             }
             function error(err) {
                 console.log(err);
+                alert("Failed to register");
             }
         }
     }

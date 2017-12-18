@@ -25,6 +25,5 @@ namespace Kazeoseki.Models.Domain
         [Required, MinLength(6, ErrorMessage = "Password requires minimum of 6 characters")]
         //[RegularExpression(@"^[a-zA-Z][0-9]$", ErrorMessage = "Does not contain a letter AND a number")]
         public string Password { get; set; }
-        public int LoginTypeId { get; set; }
     }
 }

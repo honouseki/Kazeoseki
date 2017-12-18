@@ -40,7 +40,6 @@ namespace Kazeoseki.Services.Services
                     model.CreatedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedBy = reader.GetSafeString(index++);
-                    model.LoginTypeId = reader.GetSafeInt32(index++);
                     result.Add(model);
                 }
             );
@@ -71,7 +70,6 @@ namespace Kazeoseki.Services.Services
                     model.CreatedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedDate = reader.GetSafeDateTime(index++);
                     model.ModifiedBy = reader.GetSafeString(index++);
-                    model.LoginTypeId = reader.GetSafeInt32(index++);
                 }
             );
             return model;
@@ -92,6 +90,7 @@ namespace Kazeoseki.Services.Services
                 hashPassword = _cryptographyService.Hash(password, salt, HASH_ITERATION_COUNT);
                 model.Salt = salt;
                 model.HashPassword = hashPassword;
+                model.ModifiedBy = "0";
 
                 this.DataProvider.ExecuteNonQuery(
                     "Users_Insert",
@@ -107,7 +106,7 @@ namespace Kazeoseki.Services.Services
                         paramCol.AddWithValue("@Email", model.Email);
                         paramCol.AddWithValue("@Salt", model.Salt);
                         paramCol.AddWithValue("@HashPassword", model.HashPassword);
-                        paramCol.AddWithValue("@LoginTypeId", model.LoginTypeId);
+                        paramCol.AddWithValue("@ModifiedBy", model.ModifiedBy);
                     },
                     returnParameters: delegate(SqlParameterCollection paramCol)
                     {
@@ -161,10 +160,6 @@ namespace Kazeoseki.Services.Services
             }
                 return isSuccessful;
         }
-
-
-
-
 
     }
 }

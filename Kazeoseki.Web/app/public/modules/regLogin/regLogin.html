@@ -21,12 +21,12 @@
                 <hr class="divider-w mb-10">
                 <form class="form" name="loginForm" novalidate>
                     <div class="form-group">
-                        <input class="form-control" type="text" ng-model="regLogCtrl.item.username" name="username" placeholder="Username" required ng-maxlength="50" />
+                        <input class="form-control" type="text" ng-model="regLogCtrl.logItem.username" name="username" placeholder="Username" required ng-maxlength="50" />
                         <p class="help-block" ng-show="loginForm.username.$error.required && loginForm.username.$dirty">Gimme your username</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/">
-                        <p class="help-block" ng-show="loginForm.password.$error.required && loginForm.password.$dirty">Gimme your password--I mean, well..I don't store it but..Er</p>
+                        <input class="form-control" type="password" ng-model="regLogCtrl.logItem.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/">
+                        <p class="help-block" ng-show="loginForm.password.$error.required && loginForm.password.$dirty">Gimme your password</p>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-round btn-b" ng-click="regLogCtrl.login(); loginForm.$setPristine()" ng-disabled="loginForm.$invalid">Login</button>
@@ -39,22 +39,22 @@
                 <hr class="divider-w mb-10">
                 <form class="form" name="regForm" novalidate>
                     <div class="form-group">
-                        <input class="form-control" type="text" ng-model="regLogCtrl.item.username" name="username" placeholder="Username" required ng-maxlength="50" />
+                        <input class="form-control" type="text" ng-model="regLogCtrl.regItem.username" name="username" placeholder="Username" required ng-maxlength="50" />
                         <p class="help-block" ng-show="regForm.username.$error.required && regForm.username.$dirty">Please enter a username</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="email" ng-model="regLogCtrl.item.email" name="email" placeholder="Email" required />
+                        <input class="form-control" type="email" ng-model="regLogCtrl.regItem.email" name="email" placeholder="Email" required />
                         <p class="help-block" ng-show="regForm.email.$error.required && regForm.email.$dirty">Please enter an email</p>
                         <p class="help-block" ng-show="regForm.email.$error.email && regForm.email.$dirty">Your email sucks--er, is invalid</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" ng-model="regLogCtrl.item.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/" />
+                        <input class="form-control" type="password" ng-model="regLogCtrl.regItem.password" name="password" placeholder="Password" required ng-minlength="6" ng-pattern="/(?=.*\d)(?=.*[a-zA-Z])/" />
                         <p class="help-block" ng-show="regForm.password.$error.required && regForm.password.$dirty">Do you not want a password for your account? TOO BAD. You need one</p>
                         <p class="help-block" ng-show="regForm.password.$error.minlength && regForm.password.$dirty">Your password is too short. At least 6 characters please</p>
                         <p class="help-block" ng-show="regForm.password.$error.pattern && regForm.password.$dirty">Please have your password a number and a letter because standards dictate it to be so. P.S. You disappoint me</p>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" ng-model="regLogCtrl.item.confirmPass" name="confirmPass" placeholder="Confirm Password" required ng-minlength="6" pattern="regLogCtrl.item.password" />
+                        <input class="form-control" type="password" ng-model="regLogCtrl.regItem.confirmPass" name="confirmPass" placeholder="Confirm Password" required ng-minlength="6" ng-pattern="regLogCtrl.regItem.password" />
                         <p class="help-block" ng-show="regForm.confirmPass.$error.required && regForm.confirmPass.$dirty">Please confirm your password</p>
                         <p class="help-block" ng-show="regForm.confirmPass.$error.pattern && regForm.confirmPass.$dirty">Passwords don't match, my friend</p>
                     </div>

@@ -15,16 +15,11 @@ namespace Kazeoseki.Web.Controllers.Api
     public class GalleryController : ApiController
     {
         private ImageFileService imageFileService = new ImageFileService();
-        //private GalleryService 
+        private GalleryImageService galleryImageService = new GalleryImageService();
 
-        [Route, HttpPost, AllowAnonymous]
+        [Route("file"), HttpPost, AllowAnonymous]
         public HttpResponseMessage InsertFile(EncodedImage encodedImage)
         {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-
             try
             {
                 byte[] newBytes = Convert.FromBase64String(encodedImage.EncodedImageFile);
@@ -37,6 +32,9 @@ namespace Kazeoseki.Web.Controllers.Api
                 model.ModifiedBy = "1";
                 model.Extension = encodedImage.FileExtension;
 
+                // Here, if following links example...set gallery upload here
+                // Pref - separation
+
                 ItemResponse<int> resp = new ItemResponse<int>();
                 resp.Item = imageFileService.Insert(model);
 
@@ -47,5 +45,30 @@ namespace Kazeoseki.Web.Controllers.Api
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+        [Route, HttpPost, AllowAnonymous]
+        public HttpResponseMessage Insert(GalleryImage model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            try
+            {
+                model.CategoryId = 1;
+                model.ModifiedBy = "1";
+                ItemResponse<int> resp = new ItemResponse<int>();
+                resp.Item = galleryImageService.Insert(model);
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+
+
     }
 }

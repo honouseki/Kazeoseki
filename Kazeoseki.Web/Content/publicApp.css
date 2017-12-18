@@ -27,6 +27,7 @@
 }
 
 .regLoginList {
+    padding-right: 25px;
     list-style: none;
 }
 .regLoginList li {

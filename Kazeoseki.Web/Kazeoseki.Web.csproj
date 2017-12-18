@@ -1146,6 +1146,7 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\admin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Titan-master\fonts\" />
   </ItemGroup>

@@ -31,12 +31,12 @@
         }
 
         function _update(id, data) {
-            return $http.post("/api/gallery/" + id, data, { withCredentials: true })
+            return $http.put("/api/gallery/" + id, data, { withCredentials: true })
                 .then(success).catch(error);
         }
 
         function _delete(id) {
-            return $http.post("/api/gallery/" + id, { withCredentials: true })
+            return $http.delete("/api/gallery/" + id, { withCredentials: true })
                 .then(success).catch(error);
         }
 

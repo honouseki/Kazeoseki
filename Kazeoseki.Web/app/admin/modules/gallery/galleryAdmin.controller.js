@@ -20,6 +20,7 @@
         vm.separateImageInfo = _separateImageInfo;
         vm.edit = _edit;
         vm.delete = _delete;
+        vm.setImageItem = _setImageItem;
 
         // Set to get gallery images by image type id (1 = Gallery)
         vm.imageType = 1;
@@ -27,7 +28,8 @@
         vm.item = [];
         vm.images = [];
         vm.imageItem = {};
-        vm.ImgUploadItem = {};
+        vm.imageItemCopy = {};
+        vm.imgUploadItem = {};
         vm.$scope.currentImg = null;
         vm.$scope.currentCroppedImg = null;
 
@@ -47,7 +49,6 @@
             console.log("GalleryAdminController");
             vm.getGallery();
         }
-
         function _getGallery() {
             vm.galleryAdminService.selectAll()
                 .then(success).catch(error);
@@ -60,7 +61,6 @@
                 console.log(err);
             }
         }
-
         function _getGalleryImages() {
             vm.imageFileService.selectByImageType(vm.imageType)
                 .then(success).catch(error);
@@ -73,7 +73,6 @@
                 console.log(err);
             }
         }
-
         function _setImages() {
             for (var i = 0; i < vm.item.length; i++) {
                 for (var j = 0; j < vm.images.length; j++) {
@@ -84,11 +83,10 @@
                 }
             }
         }
-
         function _upload() {
             // Uploads the image file
             vm.separateImageInfo(vm.$scope.currentCroppedImg);
-            vm.galleryAdminService.insertFile(vm.ImgUploadItem)
+            vm.galleryAdminService.insertFile(vm.imgUploadItem)
                 .then(success).catch(error);
             function success(res) {
                 console.log(res.data);
@@ -105,32 +103,95 @@
                 function success(res) {
                     console.log(res);
                     vm.imageItem = {};
-                    vm.ImgUploadItem = {};
+                    vm.imageItemCopy = {};
+                    vm.imgUploadItem = {};
                 }
                 function error(err) {
                     console.log(err);
                 }
             }
         }
-
         function _separateImageInfo(img) {
             // Extracts 64base string and image extension of given image file
             var imageInfo = img.split(",");
             var getExtension = imageInfo[0].split("/");
             var extension = getExtension[1].split(";");
-            vm.ImgUploadItem.encodedImageFile = imageInfo[1];
-            vm.ImgUploadItem.fileExtension = "." + extension[0];
+            vm.imgUploadItem.encodedImageFile = imageInfo[1];
+            vm.imgUploadItem.fileExtension = "." + extension[0];
         }
-
         function _edit() {
-            //delete current image (current item fileId), store that,
-            // [re]upload image
-            // update gallery with new, returned id
+            // Current Copy
+            console.log(vm.imageItem);
+            // Original Copy
+            console.log(vm.imageItemCopy);
+            vm.separateImageInfo(vm.$scope.currentCroppedImg);
+            console.log(vm.imgUploadItem);
+            // Deletes original image from AmazonS3
+            vm.imageFileService.delete(vm.imageItemCopy.fileId)
+                .then(success).catch(error);
+            function success(res) {
+                console.log(res);
+                reUpload();
+            }
+            function error(err) {
+                console.log(err);
+            }
+            // Re-uploads image from encoded image
+            function reUpload() {
+                vm.galleryAdminService.insertFile(vm.imgUploadItem)
+                    .then(success).catch(error);
+                function success(res) {
+                    console.log(res.data);
+                    updateGallery(res.data.item);
+                }
+                function error(err) {
+                    console.log(err);
+                }
+            }
+            // Updates Gallery
+            function updateGallery(fileId) {
+                vm.imageItem.FileId = fileId;
+                vm.galleryAdminService.update(vm.imageItem.id, vm.imageItem)
+                    .then(success).catch(error);
+                function success(res) {
+                    console.log(res);
+                    vm.imageItem = {};
+                    vm.imageItemCopy = {};
+                    vm.imgUploadItem = {};
+                }
+                function error(err) {
+                    console.log(err);
+                }
+            }
         }
-
         function _delete() {
-            // delete from table
-            // delete from amazon
+            console.log(vm.imageItem);
+            // Deletes from gallery
+            vm.galleryAdminService.delete(vm.imageItem.id)
+                .then(success).catch(error);
+            function success(res) {
+                console.log(res);
+                deleteFile(vm.imageItem.fileId);
+            }
+            function error(err) {
+                console.log(err);
+            }
+            // Deletes from AmazonS3
+            function deleteFile(id) {
+                vm.imageFileService.delete(id)
+                    .then(success).catch(error);
+                function success(res) {
+                    console.log(res);
+                    vm.imageItem = {};
+                }
+                function error(err) {
+                    console.log(err);
+                }
+            }
+        }
+        function _setImageItem(item) {
+            vm.imageItem = item;
+            vm.imageItemCopy = angular.copy(vm.imageItem);
         }
     }
 })();

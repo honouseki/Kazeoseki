@@ -30,11 +30,12 @@
                 <input type="text" style="background-color:black" ng-model="aGalleryCtrl.imageItem.imageTitle"/><br />
                 Image Description:<br />
                 <textarea rows="4" cols="40" style="background-color: black" ng-model="aGalleryCtrl.imageItem.description"></textarea><br />
-                <p md-truncate style="max-width: 200px">{{aGalleryCtrl.$scope.currentCroppedImg}}</p> 
                 <div><md-button data-toggle="modal" data-target="#adminProfileImgUploadModal">Upload Image</md-button></div>
                 <textarea cols="40" placeholder="{{aGalleryCtrl.$scope.currentCroppedImg}}"></textarea>
 
-                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Upload New Image</button>
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Submit New Image</button>
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Save Changes</button>
+
             </div>
             <div class="col-sm-8">
                 <div ng-repeat="item in aGalleryCtrl.item">
@@ -44,8 +45,8 @@
                                 Image Title: {{item.imageTitle}} <br />
                                 Image Description: {{item.description}}
                                 <hr />
-                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Edit</button>
-                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.delete()">Delete</button>
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item)">Edit</button>
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item); aGalleryCtrl.delete()">Delete</button>
                             </div>
                         </div>
                         <div class="col-sm-4">

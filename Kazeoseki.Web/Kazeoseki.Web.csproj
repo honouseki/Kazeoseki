@@ -224,6 +224,7 @@
     <Compile Include="Controllers\Api\EchoApiController.cs" />
     <Compile Include="Controllers\Api\GalleryController.cs" />
     <Compile Include="Controllers\Api\ImageFileController.cs" />
+    <Compile Include="Controllers\Api\LinkController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -240,6 +241,9 @@
     <Content Include="app\admin\modules\gallery\galleryAdmin.controller.js" />
     <Content Include="app\admin\modules\gallery\galleryAdmin.html" />
     <Content Include="app\admin\modules\gallery\galleryAdmin.service.js" />
+    <Content Include="app\admin\modules\links\linksAdmin.controller.js" />
+    <Content Include="app\admin\modules\links\linksAdmin.html" />
+    <Content Include="app\admin\modules\links\linksAdmin.service.js" />
     <Content Include="app\public\app.public.js" />
     <Content Include="app\public\app.routes.js" />
     <Content Include="app\public\common-services\imagefile.service.js" />

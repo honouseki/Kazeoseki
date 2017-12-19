@@ -224,6 +224,7 @@
     <Compile Include="Controllers\Api\EchoApiController.cs" />
     <Compile Include="Controllers\Api\GalleryController.cs" />
     <Compile Include="Controllers\Api\ImageFileController.cs" />
+    <Compile Include="Controllers\Api\LinkController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

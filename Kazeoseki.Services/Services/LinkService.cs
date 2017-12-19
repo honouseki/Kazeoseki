@@ -78,7 +78,7 @@ namespace Kazeoseki.Services.Services
                 inputParamMapper: delegate(SqlParameterCollection paramCol)
                 {
                     paramCol.AddWithValue("@Id", model.Id);
-                    paramCol.AddWithValue("@@Title", model.Title);
+                    paramCol.AddWithValue("@Title", model.Title);
                     paramCol.AddWithValue("@Description", model.Description);
                     paramCol.AddWithValue("@Url", model.Url);
                     paramCol.AddWithValue("@ImageId", model.ImageId);

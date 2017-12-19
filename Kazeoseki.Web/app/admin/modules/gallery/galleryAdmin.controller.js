@@ -17,6 +17,7 @@
         vm.getGalleryImages = _getGalleryImages;
         vm.setImages = _setImages;
         vm.upload = _upload;
+        vm.separateImageInfo = _separateImageInfo;
         vm.edit = _edit;
         vm.delete = _delete;
 
@@ -26,6 +27,21 @@
         vm.item = [];
         vm.images = [];
         vm.imageItem = {};
+        vm.ImgUploadItem = {};
+        vm.$scope.currentImg = null;
+        vm.$scope.currentCroppedImg = null;
+
+        var handleFileSelect = function (evt) {
+            var file = evt.currentTarget.files[0];
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function ($scope) {
+                    $scope.currentImg = evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+        angular.element(document.querySelector("#imgFileInput")).on("change", handleFileSelect);
 
         function _onInit() {
             console.log("GalleryAdminController");
@@ -60,25 +76,58 @@
 
         function _setImages() {
             for (var i = 0; i < vm.item.length; i++) {
-                if (vm.item[i].fileId == vm.images[i].fileId) {
-                    var sfn = vm.images[i].systemFileName;
-                    vm.item[i].displayImg = vm.fileBaseUrl + sfn;
+                for (var j = 0; j < vm.images.length; j++) {
+                    if (vm.item[i].fileId == vm.images[j].fileId) {
+                        var sfn = vm.images[j].systemFileName;
+                        vm.item[i].displayImg = vm.fileBaseUrl + sfn;
+                    }
                 }
             }
         }
 
         function _upload() {
-            console.log(vm.imageItem);
-            //first > upload image
-            // second > upload into gallery upon success 
-
-            // (functions within functions)
+            // Uploads the image file
+            vm.separateImageInfo(vm.$scope.currentCroppedImg);
+            vm.galleryAdminService.insertFile(vm.ImgUploadItem)
+                .then(success).catch(error);
+            function success(res) {
+                console.log(res.data);
+                insertGallery(res.data.item);
+            }
+            function error(err) {
+                console.log(err);
+            }
+            // Uploads into the gallery
+            function insertGallery(id) {
+                vm.imageItem.FileId = id;
+                vm.galleryAdminService.insert(vm.imageItem)
+                    .then(success).catch(success);
+                function success(res) {
+                    console.log(res);
+                    vm.imageItem = {};
+                    vm.ImgUploadItem = {};
+                }
+                function error(err) {
+                    console.log(err);
+                }
+            }
         }
+
+        function _separateImageInfo(img) {
+            // Extracts 64base string and image extension of given image file
+            var imageInfo = img.split(",");
+            var getExtension = imageInfo[0].split("/");
+            var extension = getExtension[1].split(";");
+            vm.ImgUploadItem.encodedImageFile = imageInfo[1];
+            vm.ImgUploadItem.fileExtension = "." + extension[0];
+        }
+
         function _edit() {
             //delete current image (current item fileId), store that,
             // [re]upload image
             // update gallery with new, returned id
         }
+
         function _delete() {
             // delete from table
             // delete from amazon

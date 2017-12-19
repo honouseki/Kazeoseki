@@ -3,5 +3,5 @@
     window.APP = window.APP || {};
     APP.NAME = "publicApp";
     angular
-        .module(APP.NAME, ["ui.router", APP.NAME + ".routes", "ngRoute", "ngMaterial", "ngMessages", "ngCookies"]);
+        .module(APP.NAME, ["ui.router", APP.NAME + ".routes", "ngRoute", "ngMaterial", "ngMessages", "ngCookies", "ngImgCrop"]);
 })();

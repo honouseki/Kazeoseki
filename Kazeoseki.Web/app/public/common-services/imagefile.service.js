@@ -8,8 +8,32 @@
 
     function ImageFileService($http, $q) {
         return {
-            image: _image
+            selectById: _selectById,
+            selectByImageType: _selectByImageType,
+            delete: _delete
         }
-        function _image(){}
+
+        function _selectById(id) {
+            return $http.get("/api/imagefile/" + id, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _selectByImageType(typeId) {
+            return $http.get("/api/imagefile/type/" + typeId, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _delete(id) {
+            return $http.delete("/api/imagefile/" + id, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function success(res) {
+            return res;
+        }
+
+        function error(err) {
+            return $q.reject(err);
+        }
     }
 })();

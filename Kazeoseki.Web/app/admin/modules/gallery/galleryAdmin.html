@@ -1,4 +1,9 @@
-﻿<section class="bg-dark-30" data-background="assets/images/section-4.jpg">
+﻿<style>
+    button:hover {
+        background-color: #28223B !important;
+    }
+</style>
+<section class="bg-dark-30" data-background="assets/images/section-4.jpg">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -7,10 +12,38 @@
         </div>
     </div>
 </section>
+<h4 style="text-align: center">Temporary Page Format</h4>
 <section class="module">
     <div class="container">
         <div class="row">
-            Shtuff.
+            <!--Remake this page afterwards-->
+
+            <div class="col-sm-4">
+                New Gallery Submission Form <br />
+
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Upload New Image</button>
+            </div>
+            <div class="col-sm-8">
+                <div ng-repeat="item in aGalleryCtrl.item">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Image Title: {{item.imageTitle}} <br />
+                                Image Description: {{item.description}}
+                                <hr />
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Edit</button>
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.delete()">Delete</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="{{item.displayImg}}" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+
         </div>
     </div>
 </section>

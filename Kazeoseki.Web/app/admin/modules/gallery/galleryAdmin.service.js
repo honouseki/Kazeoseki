@@ -8,8 +8,44 @@
 
     function GalleryAdminService($http, $q) {
         return {
-            gallery: _gallery
+            insert: _insert,
+            insertFile: _insertFile,
+            selectAll: _selectAll,
+            update: _update,
+            delete: _delete
         };
-        function _gallery(){}
+
+        function _insert(data) {
+            return $http.post("/api/gallery", data, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _insertFile(data) {
+            return $http.post("/api/gallery/file", data, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _selectAll() {
+            return $http.get("/api/gallery", { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _update(id, data) {
+            return $http.post("/api/gallery/" + id, data, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _delete(id) {
+            return $http.post("/api/gallery/" + id, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function success(res) {
+            return res;
+        }
+
+        function error(err) {
+            return $q.reject(err);
+        }
     }
 })();

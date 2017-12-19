@@ -1,0 +1,97 @@
+﻿<style>
+    button:hover {
+        background-color: #28223B !important;
+    }
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width: 500px;
+        height: 350px;
+    }
+</style>
+<section class="bg-dark-30" data-background="assets/images/section-4.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h1 class="module-title font-alt mb-0">Manage Gallery</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<h4 style="text-align: center">Temporary Page Format</h4>
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <!--Remake this page afterwards-->
+
+            <div class="col-sm-4">
+                New Gallery Submission Form <br />
+                Image Title: <br />
+                <input type="text" style="background-color:black" ng-model="aGalleryCtrl.imageItem.imageTitle"/><br />
+                Image Description:<br />
+                <textarea rows="4" cols="40" style="background-color: black" ng-model="aGalleryCtrl.imageItem.description"></textarea><br />
+                <div><md-button data-toggle="modal" data-target="#adminProfileImgUploadModal">Upload Image</md-button></div>
+                <textarea cols="40" placeholder="{{aGalleryCtrl.$scope.currentCroppedImg}}"></textarea>
+
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Submit New Image</button>
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Save Changes</button>
+
+            </div>
+            <div class="col-sm-8">
+                <div ng-repeat="item in aGalleryCtrl.item">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Image Title: {{item.imageTitle}} <br />
+                                Image Description: {{item.description}}
+                                <hr />
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item)">Edit</button>
+                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item); aGalleryCtrl.delete()">Delete</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="{{item.displayImg}}" height="200" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" role="dialog" id="adminProfileImgUploadModal">
+    <div class="modal-dialog" id="uploadImage">
+        <div class="container col-sm-12">
+            <header>
+                <md-button class="md-icon-button fa fa-times pull-right" data-dismiss="modal" aria-label="exitModal"></md-button>
+                <h2>Upload Profile Picture</h2>
+            </header>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Original Image</p>
+                    <img-crop area-type="square" class="cropArea" change-on-fly="true" image="currentImg" result-image="currentCroppedImg"></img-crop>
+                </div>
+                <div class="col-sm-4 pull-right">
+                    <p>Cropped Image</p>
+                    <br /><br /><br />
+                    <img ng-src="{{currentCroppedImg}}" />
+                </div><br />
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="pull-right">
+                    <md-button type="submit" class="btn btn-lg btn-primary rounded" data-dismiss="modal">Upload</md-button>
+                    <md-button class="btn btn-lg btn-danger rounded" data-dismiss="modal">Cancel</md-button>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="file" id="imgFileInput" ng-model="aGalleryCtrl.$scope.currentCroppedImg" class="form-control" />
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

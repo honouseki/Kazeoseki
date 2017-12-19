@@ -33,6 +33,24 @@
                 templateUrl: '/app/public/modules/about/about.html',
                 title: 'About Me'
                 //,controller: 'homeController as homeCtrl'
+            })
+            .state({
+                name: 'gallery',
+                //url: '/gallery/{category}/{subcategory}'
+                url: '/gallery',
+                templateUrl: '/app/public/modules/gallery/gallery.html',
+                title: 'Gallery',
+                controller: 'galleryController as galleryCtrl'
+            })
+
+
+            // Admin tab routes
+            .state({
+                name: 'galleryAdmin',
+                url: '/galleryAdmin',
+                templateUrl: '/app/admin/modules/gallery/galleryAdmin.html',
+                title: 'Gallery Management',
+                controller: 'galleryAdminController as aGalleryCtrl'
             });
     }
 })();

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\EncodedImage.cs" />
+    <Compile Include="Domain\GalleryImage.cs" />
     <Compile Include="Domain\ImageFile.cs" />
     <Compile Include="Domain\LoginUser.cs" />
     <Compile Include="Interfaces\IUserAuthData.cs" />

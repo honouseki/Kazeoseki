@@ -1,8 +1,10 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
+using Kazeoseki.Data;
 using Kazeoseki.Models.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -73,7 +75,72 @@ namespace Kazeoseki.Services.Services
             return id;
         }
 
-        //public void DeleteAmazonFile ; reference FileUploadService.cs from LPGallery (separate to two functions)
+        public List<ImageFile> SelectByImageType(int typeId)
+        {
+            List<ImageFile> result = new List<ImageFile>();
+            this.DataProvider.ExecuteCmd(
+                "ImageFiles_SelectByImageType",
+                inputParamMapper: delegate(SqlParameterCollection paramCol) 
+                {
+                    paramCol.AddWithValue("@ImageFileType", typeId);
+                },
+                singleRecordMapper: delegate(IDataReader reader, short set)
+                {
+                    ImageFile model = new ImageFile();
+                    int index = 0;
+
+                    model.FileId = reader.GetSafeInt32(index++);
+                    model.ImageFileName = reader.GetSafeString(index++);
+                    model.SystemFileName = reader.GetSafeString(index++);
+                    model.ImageFileType = reader.GetSafeInt32(index++);
+                    model.Location = reader.GetSafeString(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+
+                    result.Add(model);
+                }
+            );
+            return result;
+        }
+
+        public ImageFile SelectById(int id)
+        {
+            ImageFile model = new ImageFile();
+            this.DataProvider.ExecuteCmd(
+                "ImageFiles_SelectById",
+                inputParamMapper: delegate (SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Id", id);
+                },
+                singleRecordMapper: delegate (IDataReader reader, short set)
+                {
+                    int index = 0;
+                    model.FileId = reader.GetSafeInt32(index++);
+                    model.ImageFileName = reader.GetSafeString(index++);
+                    model.SystemFileName = reader.GetSafeString(index++);
+                    model.ImageFileType = reader.GetSafeInt32(index++);
+                    model.Location = reader.GetSafeString(index++);
+                    model.CreatedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedDate = reader.GetSafeDateTime(index++);
+                    model.ModifiedBy = reader.GetSafeString(index++);
+                }
+            );
+            return model;
+        }
+
+        public void Delete(int id, string systemFileName)
+        {
+            this.DataProvider.ExecuteNonQuery(
+                "ImageFiles_Delete",
+                inputParamMapper: delegate(SqlParameterCollection paramCol)
+                {
+                    paramCol.AddWithValue("@Id", id);
+                }
+            );
+            // Deletes from AmazonC3
+            DeleteFromAmazon(systemFileName);
+        }
 
         private void SaveToAmazon(string systemFileName, byte[] bytes)
         {
@@ -93,5 +160,24 @@ namespace Kazeoseki.Services.Services
             }
         }
 
+        private void DeleteFromAmazon(string systemFileName)
+        {
+            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USWest1))
+            {
+                DeleteObjectRequest obj = new DeleteObjectRequest
+                {
+                    BucketName = "kazeoseki",
+                    Key = string.Format("images/{0}", systemFileName)
+                };
+                try
+                {
+                    client.DeleteObject(obj);
+                }
+                catch (AmazonS3Exception ex)
+                {
+                    Console.WriteLine(ex.Message, ex.InnerException);
+                }
+            }
+        }
     }
 }

@@ -16,19 +16,13 @@
 
         function _onInit() {
             console.log("On Home Controller");
-            //$location.hash("topOfPage");
-            vm.homeService.getEchoTest("On the Home Controller through API")
-                .then(success).catch(error);
-            function success(res) {
-                console.log(res);
-            }
-            function error(err) {
-                console.log(err);
-            }
+
+            // Initiates twitch-embed object
             new Twitch.Embed("twitch-embed", {
                 width: 900,
                 height: 480,
-                channel: "carrotnubby"
+                channel: "carrotnubby",
+                theme: "dark"
             });
         }
     }

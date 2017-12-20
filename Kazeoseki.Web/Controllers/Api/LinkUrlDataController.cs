@@ -1,4 +1,5 @@
-﻿using Kazeoseki.Models.ViewModels;
+﻿using Kazeoseki.Models.Domain;
+using Kazeoseki.Models.ViewModels;
 using Kazeoseki.Services.Services;
 using KazeosekiApp.Models.Responses;
 using System;
@@ -15,13 +16,13 @@ namespace Kazeoseki.Web.Controllers.Api
     {
         LinkUrlDataService linkUrlDataService = new LinkUrlDataService();
 
-        [Route, HttpGet, AllowAnonymous]
-        public HttpResponseMessage Get()
+        [Route, HttpPost, AllowAnonymous]
+        public HttpResponseMessage Get(Url url)
         {
             try
             {
                 ItemResponse<LinkUrlData> resp = new ItemResponse<LinkUrlData>();
-                resp.Item = linkUrlDataService.Get();
+                resp.Item = linkUrlDataService.Get(url);
                 return Request.CreateResponse(HttpStatusCode.OK, resp);
             }
             catch (Exception ex)

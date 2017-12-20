@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Kazeoseki.Models.Domain;
 using Kazeoseki.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,18 @@ namespace Kazeoseki.Services.Services
 {
     public class LinkUrlDataService : BaseService
     {
-        public LinkUrlData Get()
+        public LinkUrlData Get(Url url)
         {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
             //temporarily hardcoded ; this will be a parameter
-            string url = "https://kazeoseki.deviantart.com";
+            //string url = "https://kazeoseki.deviantart.com";
 
             LinkUrlData model = new LinkUrlData();
-            model.Url = url;
+            model.Url = url.UrlString;
             var htmlWeb = new HtmlWeb();
             HtmlDocument document = null;
-            document = htmlWeb.Load(url);
+            document = htmlWeb.Load(url.UrlString);
 
             // Grabs info for UserIconUrl
             var anchortag1 = document.DocumentNode.Descendants("div")

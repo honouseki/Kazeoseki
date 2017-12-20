@@ -24,27 +24,30 @@
                 Description <br />
                 <textarea rows="4" cols="40" style="background-color: black" ng-model="aLinksCtrl.linkItem.description"></textarea><br />
                 DeviantArt Link <input style="background-color: black" ng-model="aLinksCtrl.linkItem.url" /><br />
-                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Submit New Link</button>
-                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Save Changes</button>
+                <button class="btn btn-circle btn-b" type="button" ng-click="aLinksCtrl.submit()">Submit New Link</button>
+                <button class="btn btn-circle btn-b" type="button" ng-click="aLinksCtrl.edit()">Save Changes</button>
 
             </div>
             <div class="col-sm-8">
                 <div ng-repeat="item in aLinksCtrl.items">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <div>
-                                Image Title: {{item.imageTitle}} <br />
-                                Image Description: {{item.description}}
-                                <hr />
-                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item)">Edit</button>
-                                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.setImageItem(item); aGalleryCtrl.delete()">Delete</button>
+                                Link Title: {{item.title}} <br />
+                                Link Description: {{item.description}}
+                                <br />
+                                <img src="{{item.linkUrlData.userIconUrl}}" />
+                                <p>{{item.linkUrlData.username}}</p>
+                                <p>{{item.linkUrlData.tagLine}}</p>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <img src="{{item.displayImg}}" height="200" />
+                        <div class="col-sm-2">
+                            <button class="btn btn-circle btn-b" type="button" ng-click="aLinksCtrl.setLinkItem(item)">Edit</button>
+                            <button class="btn btn-circle btn-b" type="button" ng-click="aLinksCtrl.delete(item.id)">Delete</button>
                         </div>
                     </div>
                     <br />
+                    <hr />
                 </div>
             </div>
 

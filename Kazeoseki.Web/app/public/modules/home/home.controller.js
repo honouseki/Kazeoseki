@@ -25,6 +25,11 @@
             function error(err) {
                 console.log(err);
             }
+            new Twitch.Embed("twitch-embed", {
+                width: 900,
+                height: 480,
+                channel: "carrotnubby"
+            });
         }
     }
 })();

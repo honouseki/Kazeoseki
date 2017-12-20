@@ -32,7 +32,6 @@
                 url: '/about',
                 templateUrl: '/app/public/modules/about/about.html',
                 title: 'About Me'
-                //,controller: 'homeController as homeCtrl'
             })
             .state({
                 name: 'gallery',

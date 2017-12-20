@@ -14,8 +14,8 @@ namespace Kazeoseki.Services.Services
         {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
-            //temporarily hardcoded
-            string url = "https://kazeoseki.deviantart.com";
+            //temporarily hardcoded ; this will be a parameter
+            string url = "https://yuumei.deviantart.com";
 
             LinkUrlData model = new LinkUrlData();
             model.Url = url;
@@ -23,23 +23,19 @@ namespace Kazeoseki.Services.Services
             HtmlDocument document = null;
             document = htmlWeb.Load(url);
 
-            //var items1 = document.DocumentNode.Descendants("div")
-            //    .Where(node => node.GetAttributeValue("class", "")
-            //    .Equals("authorative-avatar")).ToList();
+            // Grabs info for UserIconUrl
+            var anchortag1 = document.DocumentNode.Descendants("div")
+                .Where(node => node.GetAttributeValue("class", "")
+                .Equals("authorative-avatar")).ToList();
+            model.UserIconUrl = anchortag1[0].Descendants("img").FirstOrDefault().GetAttributeValue("src", "");
 
-            string items2 = document.DocumentNode.SelectNodes("//img")
-                // No class 'ghost-edit' in here...this works... if anything
-                //.Where(d => d.Attributes.Contains("class")
-                //    &&
-                //    d.Attributes["class"].Value.Contains("ghost-edit"))
-                .First()
-                .Attributes["src"].Value;
+            // Grabs Username / TagLine
+            var anchortag2 = document.DocumentNode.Descendants("div")
+                .Where(node => node.GetAttributeValue("class", "")
+                .Equals("gruserbadge")).ToList();
+            model.Username = anchortag2[0].Descendants("a").FirstOrDefault().InnerText;
+            model.TagLine = anchortag2[0].LastChild.InnerText;
             
-            //string item2 = document.DocumentNode
-            //        .SelectNodes("//a/[@class='ghost-edit']")
-            //        .First()
-            //        .Attributes["href"].Value;
-            model.UserIconUrl = items2;
             return model;
         }
     }

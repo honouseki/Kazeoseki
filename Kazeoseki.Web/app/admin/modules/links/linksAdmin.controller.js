@@ -66,6 +66,8 @@
                 console.log(res);
                 vm.linkItem = {};
                 vm.linkItemCopy = {};
+                // resets items
+                vm.getLinks();
             }
             function error(err) {
                 console.log(err);
@@ -80,6 +82,8 @@
                 console.log(res);
                 vm.linkItem = {};
                 vm.linkItemCopy = {};
+                // resets items
+                vm.getLinks();
             }
             function error(err) {
                 console.log(err);
@@ -92,6 +96,8 @@
                 .then(success).catch(error);
             function success(res) {
                 console.log(res);
+                // resets items
+                vm.getLinks();
             }
             function error(err) {
                 console.log(err);

@@ -105,6 +105,8 @@
                     vm.imageItem = {};
                     vm.imageItemCopy = {};
                     vm.imgUploadItem = {};
+                    // resets items
+                    vm.getGallery();
                 }
                 function error(err) {
                     console.log(err);
@@ -158,6 +160,8 @@
                     vm.imageItem = {};
                     vm.imageItemCopy = {};
                     vm.imgUploadItem = {};
+                    // resets items
+                    vm.getGallery();
                 }
                 function error(err) {
                     console.log(err);
@@ -183,6 +187,8 @@
                 function success(res) {
                     console.log(res);
                     vm.imageItem = {};
+                    // resets items
+                    vm.getGallery();
                 }
                 function error(err) {
                     console.log(err);

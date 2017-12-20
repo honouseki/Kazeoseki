@@ -18,9 +18,16 @@ namespace Kazeoseki.Web.Controllers.Api
         [Route, HttpGet, AllowAnonymous]
         public HttpResponseMessage Get()
         {
-            ItemResponse<LinkUrlData> resp = new ItemResponse<LinkUrlData>();
-            resp.Item = linkUrlDataService.Get();
-            return Request.CreateResponse(HttpStatusCode.OK, resp);
+            try
+            {
+                ItemResponse<LinkUrlData> resp = new ItemResponse<LinkUrlData>();
+                resp.Item = linkUrlDataService.Get();
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
     }
 }

@@ -20,19 +20,16 @@
 
             <div class="col-sm-4">
                 New Link Submission Form <br />
-                Image Title: <br />
-                <input type="text" style="background-color:black" ng-model="aGalleryCtrl.imageItem.imageTitle" /><br />
-                Image Description:<br />
-                <textarea rows="4" cols="40" style="background-color: black" ng-model="aGalleryCtrl.imageItem.description"></textarea><br />
-                <div><md-button data-toggle="modal" data-target="#adminProfileImgUploadModal">Upload Image</md-button></div>
-                <textarea cols="40" placeholder="{{aGalleryCtrl.$scope.currentCroppedImg}}"></textarea>
-
-                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Submit New Image</button>
+                Title <input style="background-color:black" type="text" ng-model="aLinksCtrl.linkItem.title" /> <br />
+                Description <br />
+                <textarea rows="4" cols="40" style="background-color: black" ng-model="aLinksCtrl.linkItem.description"></textarea><br />
+                DeviantArt Link <input style="background-color: black" ng-model="aLinksCtrl.linkItem.url" /><br />
+                <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.upload()">Submit New Link</button>
                 <button class="btn btn-circle btn-b" type="button" ng-click="aGalleryCtrl.edit()">Save Changes</button>
 
             </div>
             <div class="col-sm-8">
-                <div ng-repeat="item in aGalleryCtrl.item">
+                <div ng-repeat="item in aLinksCtrl.items">
                     <div class="row">
                         <div class="col-sm-6">
                             <div>

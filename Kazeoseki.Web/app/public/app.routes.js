@@ -51,6 +51,13 @@
                 templateUrl: '/app/admin/modules/gallery/galleryAdmin.html',
                 title: 'Gallery Management',
                 controller: 'galleryAdminController as aGalleryCtrl'
+            })
+            .state({
+                name: 'linksAdmin',
+                url: '/linksAdmin',
+                templateUrl: '/app/admin/modules/links/linksAdmin.html',
+                title: 'Inspiration Links Management',
+                controller: 'linksAdminController as aLinksCtrl'
             });
     }
 })();

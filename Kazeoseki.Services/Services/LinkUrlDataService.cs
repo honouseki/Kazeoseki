@@ -15,7 +15,7 @@ namespace Kazeoseki.Services.Services
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
             //temporarily hardcoded ; this will be a parameter
-            string url = "https://yuumei.deviantart.com";
+            string url = "https://kazeoseki.deviantart.com";
 
             LinkUrlData model = new LinkUrlData();
             model.Url = url;

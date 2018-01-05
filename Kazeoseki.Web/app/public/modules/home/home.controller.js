@@ -16,7 +16,6 @@
 
         function _onInit() {
             console.log("On Home Controller");
-
             // Initiates twitch-embed object
             new Twitch.Embed("twitch-embed", {
                 width: 900,

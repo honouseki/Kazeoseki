@@ -1,2 +1,2 @@
 # Kazeoseki
-Personal Art Portfolio Website
+Personal Art Portfolio Website - Currently scrapped! Will be remade
